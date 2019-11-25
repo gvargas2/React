@@ -1,2 +1,3 @@
-# react
-Ejercicios React
+# Ejercicios de React
+
+## Proyecto "Hoteles"
