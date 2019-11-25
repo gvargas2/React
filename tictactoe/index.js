@@ -1,3 +1,5 @@
+'use strict'
+
 class Square extends React.Component {
   render() {
     return (
