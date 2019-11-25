@@ -17,12 +17,15 @@ Most React developers use a special syntax called “JSX” which makes these st
 
 JSX comes with the full power of JavaScript. You can put any JavaScript expressions within braces inside JSX. Each React element is a JavaScript object that you can store in a variable or pass around in your program.
 
-The ShoppingList component above only renders built-in DOM components like <div /> and <li />. But you can compose and render custom React components too. Each React component is encapsulated and can operate independently; this allows you to build complex UIs from simple components.
+The ShoppingList component above only renders built-in DOM components like "<div />" and "<li />". But you can compose and render custom React components too. Each React component is encapsulated and can operate independently; this allows you to build complex UIs from simple components.
 
 ### Inspecting the Starter Code
 By inspecting the code, you’ll notice that we have three React components:
 1. Square: The Square component renders a single <button>
 2. Board: The Board renders 9 squares
 3. Game: The Game component renders a board with placeholder values
+
+### Passing Data Through Props
+Let’s try passing some data from our Board component to our Square component. In Board’s render Square method, change the code to pass a prop called value to the Square:
 
 ## Proyecto "Hoteles"
