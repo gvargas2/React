@@ -21,13 +21,15 @@ class Square extends React.Component {
         // onClick={() => this.setState({value: "X"})}>
         onClick={() => this.props.onClick()}
       >
-
       {this.props.value}
 
       </button>
     );
   }
 }
+
+//{this.state.value}
+//Cambiamos this.state, por this.props
 
 class Board extends React.Component {
 
