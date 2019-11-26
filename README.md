@@ -93,7 +93,7 @@ We may think that Board should just ask each Square for the Square’s state. Al
 
 To collect **data from multiple children**, or to have **two child components communicate with each other**, you need to **declare the shared state in their parent component** instead. The **parent component can pass the state back down to the children by using props**; this keeps the child components in sync with each other and with the parent component.
 
-Lifting state into a parent component is common when React components are refactored — let’s take this opportunity to try it out.
+Lifting state into a parent component is common when React components are refactored.
 
 **Add a constructor to the Board and set the Board’s initial state to contain an array of 9 nulls corresponding to the 9 squares**:
 
