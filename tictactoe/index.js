@@ -22,7 +22,6 @@ class Square extends React.Component {
         onClick={() => this.props.onClick()}
       >
 
-      //Cambiamos this.state, por this.props
       {this.props.value}
 
       </button>
