@@ -1,6 +1,7 @@
 'use strict'
 
-class Square extends React.Component {
+// Se elimino para hacer una funcion Square
+//class Square extends React.Component {
   //Agrego un "constructor a la clase para inicializar el "estado"*/
   /*Se eliminó el constructor porque Square ya no llega en segimiento del estado del juego
 
