@@ -50,6 +50,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true,
     };
   }
 
@@ -57,7 +58,10 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
-    this.setState({squares: squares});
+    this.setState({
+      squares: squares,
+      xIsNext: !this.sate.xIsNext,
+    });
   }
 
   renderSquare(i) {

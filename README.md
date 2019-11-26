@@ -97,12 +97,12 @@ Lifting state into a parent component is common when React components are refact
 
 **Add a constructor to the Board and set the Board’s initial state to contain an array of 9 nulls corresponding to the 9 squares**:
 
-  constructor(props) {
-      super(props);
-      this.state = {
-        squares: Array(9).fill(null),
-      };
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+          squares: Array(9).fill(null),
+        };
+      }
 
   In the beginning, **we passed the value prop down from the Board to show numbers from 0 to 8** in every Square. In a different previous step, **we replaced the numbers with an “X” mark determined by Square’s own state**. This is why **Square currently ignores the value prop** passed to it by the Board.
 
@@ -118,14 +118,14 @@ Next, we need to change **what happens when a Square is clicked**. The Board com
 
 Instead, we’ll **pass down a function from the Board to the Square**, and we’ll have **Square call that function when a square is clicked**. We’ll change the `renderSquare` method in Board to:
 
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
-      />
-    );
-  }
+    renderSquare(i) {
+      return (
+        <Square
+          value={this.state.squares[i]}
+          onClick={() => this.handleClick(i)}
+        />
+      );
+    }
 
 We split the returned element into multiple lines for readability, and **added parentheses** so that JavaScript doesn’t insert a semicolon after return and break our code.
 
@@ -135,17 +135,17 @@ Now we’re passing **down two props from Board to Square**: `value` and `onClic
 - Replace `this.setState()` with `this.props.onClick()` in Square’s render method
 - **Delete the constructor** from Square because **Square no longer keeps track of the game’s state**
 
-    class Square extends React.Component {
-      render() {
-        return (
-          <button
-            className="square"
-            onClick={() => this.props.onClick()} >
-            {this.props.value}
-          </button>
-        );
+      class Square extends React.Component {
+        render() {
+          return (
+            <button
+              className="square"
+              onClick={() => this.props.onClick()} >
+              {this.props.value}
+            </button>
+          );
+        }
       }
-    }
 
 When a Square is clicked, the `onClick` function provided by the Board is called. Here’s a review of how this is achieved:
 
@@ -158,6 +158,7 @@ When a Square is clicked, the `onClick` function provided by the Board is called
 The DOM <button> element’s `onClick` attribute has a special meaning to React because it is a **built-in component**. For custom components like Square, the naming is up to you. We could give any name to the Square’s `onClick` prop or Board’s `handleClick` method, and the code would work the same. In React, it’s conventional to use `on[Event]` names for props which represent events and `handle[Event]` for the methods which handle the events.
 
 When we try to click a Square, we should get an error because we haven’t defined handleClick yet.
+
 
   class Board extends React.Component {
     constructor(props) {
@@ -235,18 +236,17 @@ We have changed `this.props` to props both times it appears.
 When we modified the Square to be a function component, we also changed `onClick={() => this.props.onClick()}` to a shorter onClick={props.onClick} (note the lack of parentheses on both sides). **Este fue el error en commits 40`s**
 
 ### Taking Turns
-We now need to fix an obvious defect in our tic-tac-toe game: the “O”s cannot be marked on the board.
+We’ll set the first move to be “X” by default. We can set this default by **modifying the initial state** in our Board constructor:
 
-We’ll set the first move to be “X” by default. We can set this default by modifying the initial state in our Board constructor:
+    class Board extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          squares: Array(9).fill(null),
+          xIsNext: true,
+        };
+      }
 
-class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    };
-  }
 Each time a player moves, xIsNext (a boolean) will be flipped to determine which player goes next and the game’s state will be saved. We’ll update the Board’s handleClick function to flip the value of xIsNext:
 
   handleClick(i) {
