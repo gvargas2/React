@@ -29,7 +29,7 @@ class Square extends React.Component {
 }
 
 //{this.state.value}
-//Cambiamos this.state, por this.props
+//Cambiamos this.state, por this.props --> Tuvimos que bajar esta anotación.
 
 class Board extends React.Component {
 
