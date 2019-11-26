@@ -1,30 +1,13 @@
 'use strict'
-
-
-  function Square(props) {
-    return (
-      //Al clikear cualquier botón, me salta una alerta
-      <button
-        className="square"
-        onClick={props.onClick()}
-        >
-          {props.value}
-
-      </button>
-    );
-  }
-
-
-//{this.state.value}
-//Cambiamos this.state, por this.props --> Tuvimos que bajar esta anotación.
-
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
 
 class Board extends React.Component {
-
-/*Agregamos un constructor al elemento Board
-y establecemos un estado inicial que contenga
-un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
-
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +15,6 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     };
   }
 
-  /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
@@ -40,21 +22,16 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   }
 
   renderSquare(i) {
-    //Hago que cada boton, cuadrado tenga un valor
-    //return <Square value={i}/>;
-
     return (
       <Square
-        //Hago que cada cuadrado tenga la propiedad "X" "O" o "Null"
         value={this.state.squares[i]}
-        //Hacemos que al clikear un cuadrado, se llame el estado del Board.
         onClick={() => this.handleClick(i)}
       />
     );
   }
 
   render() {
-    const status = 'Siguiente Jugador: X';
+    const status = 'Next player: X';
 
     return (
       <div>
