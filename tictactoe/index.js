@@ -41,11 +41,10 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     /*Hago que cada boton, cuadrado tenga un valor*/
     /*return <Square value={i}/>;*/
 
-
     return (
       <Square
         /*Hago que cada cuadrado tenga la propiedad "X" "O" o "Null"*/
-        value={this.state.squares[i]} />;
+        value={this.state.squares[i]}
         /*Hacemos que al clikear un cuadrado, se llame el estado del Board.*/
         onClick={() => this.handleClick(i)}
       />
