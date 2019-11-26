@@ -1,42 +1,17 @@
-'use strict'
-
 class Square extends React.Component {
-  //Agrego un "constructor a la clase para inicializar el "estado"*/
-  /*Se eliminó el constructor porque Square ya no llega en segimiento del estado del juego
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
-
-  */
-
   render() {
     return (
-      //Al clikear cualquier botón, me salta una alerta
       <button
         className="square"
-        // onClick={() => this.setState({value: "X"})}>
         onClick={() => this.props.onClick()}
       >
-
-      //{this.state.value}
-      //Cambiamos this.state, por this.props
-      {this.props.value}
-
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
-
-/*Agregamos un constructor al elemento Board
-y establecemos un estado inicial que contenga
-un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
-
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +19,6 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     };
   }
 
-  /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
@@ -52,14 +26,9 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   }
 
   renderSquare(i) {
-    //Hago que cada boton, cuadrado tenga un valor
-    //return <Square value={i}/>;
-
     return (
       <Square
-        //Hago que cada cuadrado tenga la propiedad "X" "O" o "Null"
         value={this.state.squares[i]}
-        //Hacemos que al clikear un cuadrado, se llame el estado del Board.
         onClick={() => this.handleClick(i)}
       />
     );
@@ -72,19 +41,13 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}
         </div>
         <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.renderSquare(3)}{this.renderSquare(4)}{this.renderSquare(5)}
         </div>
         <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {this.renderSquare(6)}{this.renderSquare(7)}{this.renderSquare(8)}
         </div>
       </div>
     );
