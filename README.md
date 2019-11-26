@@ -232,13 +232,9 @@ Replace the Square class with this function:
 
 We have changed `this.props` to props both times it appears.
 
-View the full code at this point
+When we modified the Square to be a function component, we also changed `onClick={() => this.props.onClick()}` to a shorter onClick={props.onClick} (note the lack of parentheses on both sides). **Este fue el error en commits 40`s**
 
-Note
-
-When we modified the Square to be a function component, we also changed onClick={() => this.props.onClick()} to a shorter onClick={props.onClick} (note the lack of parentheses on both sides).
-
-Taking Turns
+### Taking Turns
 We now need to fix an obvious defect in our tic-tac-toe game: the “O”s cannot be marked on the board.
 
 We’ll set the first move to be “X” by default. We can set this default by modifying the initial state in our Board constructor:
