@@ -60,7 +60,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     squares[i] = this.state.xIsNext ? 'X' : 'O' ;
     this.setState({
       squares: squares,
-      xIsNext: !this.sate.xIsNext,
+      xIsNext: !this.state.xIsNext,
     });
   }
 
