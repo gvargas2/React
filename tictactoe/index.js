@@ -18,7 +18,6 @@ class Square extends React.Component {
       //Al clikear cualquier botón, me salta una alerta
       <button
         className="square"
-        //Cambiamos los this.props por props 
         onClick={props.onClick()}
         >
           {props.value}
@@ -35,6 +34,9 @@ class Square extends React.Component {
 onClick={() => this.props.onClick()}
 >
 {this.props.value}
+
+Cambiamos los this.props por props 
+
 */
 
 class Board extends React.Component {
