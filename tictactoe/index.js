@@ -79,7 +79,8 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   }
 
   render() {
-    const status = 'Siguiente Jugador: X';
+    //Vamos a determinar que jugador sigue
+    const status = 'Siguiente Jugador: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div>

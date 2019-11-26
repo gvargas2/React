@@ -247,25 +247,27 @@ We’ll set the first move to be “X” by default. We can set this default by 
         };
       }
 
-Each time a player moves, xIsNext (a boolean) will be flipped to determine which player goes next and the game’s state will be saved. We’ll update the Board’s handleClick function to flip the value of xIsNext:
+Each time a player moves, `xIsNext` (a boolean) will be **flipped to determine which player goes next** and the game’s state will be **saved**. We’ll update the Board’s `handleClick` function to flip the value of `xIsNext`:
 
-  handleClick(i) {
-    const squares = this.state.squares.slice();
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext,
-    });
-  }
-With this change, “X”s and “O”s can take turns. Try it!
+    handleClick(i) {
+      const squares = this.state.squares.slice();
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+      });
+    }
 
-Let’s also change the “status” text in Board’s render so that it displays which player has the next turn:
+With this change, “X”s and “O”s can take turns.
 
-  render() {
-    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+Let’s also **change the “status” text in Board’s render** so that it displays which player has the next turn:
 
-    return (
-      // the rest has not changed
+    render() {
+      const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+
+      return (
+        // the rest has not changed
+
 After applying these changes, you should have this Board component:
 
 class Board extends React.Component {
