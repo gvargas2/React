@@ -13,7 +13,8 @@ class Square extends React.Component {
 
   */
 
-  render() {
+  //render() {
+  function Square(props) {
     return (
       //Al clikear cualquier botón, me salta una alerta
       <button
@@ -25,7 +26,7 @@ class Square extends React.Component {
       </button>
     );
   }
-}
+
 
 //{this.state.value}
 //Cambiamos this.state, por this.props --> Tuvimos que bajar esta anotación.
@@ -35,7 +36,7 @@ onClick={() => this.props.onClick()}
 >
 {this.props.value}
 
-Cambiamos los this.props por props 
+Cambiamos los this.props por props
 
 */
 
