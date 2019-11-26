@@ -97,4 +97,35 @@ Lifting state into a parent component is common when React components are refact
 
 **Add a constructor to the Board and set the Board’s initial state to contain an array of 9 nulls corresponding to the 9 squares**:
 
+  constructor(props) {
+      super(props);
+      this.state = {
+        squares: Array(9).fill(null),
+      };
+    }
+
+  In the beginning, **we passed the value prop down from the Board to show numbers from 0 to 8** in every Square. In a different previous step, **we replaced the numbers with an “X” mark determined by Square’s own state**. This is why **Square currently ignores the value prop** passed to it by the Board.
+
+  We will now **use the prop passing mechanism again**. We will **modify the Board** to **instruct each individual Square about its current value ('X', 'O', or null)**. We have already defined the squares array in the Board’s constructor, and we will **modify the Board’s renderSquare method** to read from it:
+
+      renderSquare(i) {
+        return <Square value={this.state.squares[i]} />;
+      }
+
+**Each Square will now receive a value prop that will either be 'X', 'O', or null for empty squares**.
+
+Next, we need to change **what happens when a Square is clicked**. The Board component now maintains **which squares are filled**. We need to create a way for the **Square to update the Board’s state**. Since state is considered to be private to a component that defines it, **we cannot update the Board’s state directly from Square**.
+
+Instead, we’ll **pass down a function from the Board to the Square**, and we’ll have **Square call that function when a square is clicked**. We’ll change the `renderSquare` method in Board to:
+
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
+  }
+
+
 ## Proyecto "Hoteles"
