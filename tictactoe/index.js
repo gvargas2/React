@@ -18,10 +18,10 @@ class Square extends React.Component {
       //Al clikear cualquier botón, me salta una alerta
       <button
         className="square"
-        // onClick={() => this.setState({value: "X"})}>
-        onClick={() => this.props.onClick()}
-      >
-      {this.props.value}
+        //Cambiamos los this.props por props 
+        onClick={props.onClick()}
+        >
+          {props.value}
 
       </button>
     );
@@ -30,6 +30,12 @@ class Square extends React.Component {
 
 //{this.state.value}
 //Cambiamos this.state, por this.props --> Tuvimos que bajar esta anotación.
+
+/* onClick={() => this.setState({value: "X"})}>
+onClick={() => this.props.onClick()}
+>
+{this.props.value}
+*/
 
 class Board extends React.Component {
 
@@ -66,7 +72,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Siguiente Jugador: X';
 
     return (
       <div>

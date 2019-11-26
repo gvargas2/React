@@ -135,17 +135,17 @@ Now we’re passing **down two props from Board to Square**: `value` and `onClic
 - Replace `this.setState()` with `this.props.onClick()` in Square’s render method
 - **Delete the constructor** from Square because **Square no longer keeps track of the game’s state**
 
-  class Square extends React.Component {
-    render() {
-      return (
-        <button
-          className="square"
-          onClick={() => this.props.onClick()} >
-          {this.props.value}
-        </button>
-      );
+    class Square extends React.Component {
+      render() {
+        return (
+          <button
+            className="square"
+            onClick={() => this.props.onClick()} >
+            {this.props.value}
+          </button>
+        );
+      }
     }
-  }
 
 When a Square is clicked, the `onClick` function provided by the Board is called. Here’s a review of how this is achieved:
 
@@ -195,19 +195,19 @@ There are generally **two approaches to changing data**. The first approach is t
 
 Data Change with Mutation
 
-  var player = {score: 1, name: 'Jeff'};
-  player.score = 2;
-  // Now player is {score: 2, name: 'Jeff'}
+    var player = {score: 1, name: 'Jeff'};
+    player.score = 2;
+    // Now player is {score: 2, name: 'Jeff'}
 
 Data Change without Mutation
 
-  var player = {score: 1, name: 'Jeff'};
+    var player = {score: 1, name: 'Jeff'};
 
-  var newPlayer = Object.assign({}, player, {score: 2});
-  // Now player is unchanged, but newPlayer is {score: 2, name: 'Jeff'}
+    var newPlayer = Object.assign({}, player, {score: 2});
+    // Now player is unchanged, but newPlayer is {score: 2, name: 'Jeff'}
 
-  // Or if you are using object spread syntax proposal, you can write:
-  // var newPlayer = {...player, score: 2};
+    // Or if you are using object spread syntax proposal, you can write:
+    // var newPlayer = {...player, score: 2};
 
 **The end result is the same but by not mutating** (or changing the underlying data) directly, we gain several benefits described below.
 
@@ -218,18 +218,19 @@ Data Change without Mutation
 ### Function Components
 We’ll now **change the Square to be a function component**.
 
-In React, function components are a simpler way to write components that only contain a render method and don’t have their own state. Instead of defining a class which extends React.Component, we can write a function that takes props as input and returns what should be rendered. Function components are less tedious to write than classes, and many components can be expressed this way.
+In React, function components are a **simpler way to write components that only contain a render method and don’t have their own state**. Instead of defining a class which extends React.Component, we can write a **function that takes props as input and returns what should be rendered**. Function components are less tedious to write than classes, and many components can be expressed this way.
 
 Replace the Square class with this function:
 
-function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
-We have changed this.props to props both times it appears.
+      function Square(props) {
+        return (
+          <button className="square" onClick={props.onClick}>
+            {props.value}
+          </button>
+        );
+      }
+
+We have changed `this.props` to props both times it appears.
 
 View the full code at this point
 
