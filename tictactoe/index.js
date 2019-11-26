@@ -57,7 +57,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
   handleClick(i) {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
+    squares[i] = this.state.xIsNext ? 'X' : 'O' ;
     this.setState({
       squares: squares,
       xIsNext: !this.sate.xIsNext,
