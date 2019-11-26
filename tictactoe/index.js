@@ -59,7 +59,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
 
   /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
 
-  handleClick(i) {
+  /*handleClick(i) {
     const squares = this.state.squares.slice();
     //Haremos que se ignoren los cuadros ya rellenados o que el juego llegue a su término
     if (calculateWinner(squares) || squares[i]) {
@@ -139,33 +139,33 @@ class Game extends React.Component {
 
   //Agregamos esta sección por history
   handleClick(i) {
-    const history = this.state.history;
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([{
-        squares: squares
-      }]),
-      xIsNext: !this.state.xIsNext,
-    });
-  }
+     const history = this.state.history;
+     const current = history[history.length - 1];
+     const squares = current.squares.slice();
+     if (calculateWinner(squares) || squares[i]) {
+       return;
+     }
+     squares[i] = this.state.xIsNext ? 'X' : 'O';
+     this.setState({
+       history: history.concat([{
+         squares: squares
+       }]),
+       xIsNext: !this.state.xIsNext,
+     });
+   }
 
   render() {
     //to use the most recent history entry to determine and display the game’s status
     const history = this.state.history;
-     const current = history[history.length - 1];
-     const winner = calculateWinner(current.squares);
+    const current = history[history.length - 1];
+    const winner = calculateWinner(current.squares);
 
-     let status;
-     if (winner) {
-       status = 'Winner: ' + winner;
-     } else {
-       status = 'Siguiente Jugador: ' + (this.state.xIsNext ? 'X' : 'O');
-     }
+    let status;
+    if (winner) {
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
 
     return (
       <div className="game">
