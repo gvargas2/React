@@ -58,7 +58,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
 /*
 
   /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
-  /* History: podemos borrar esta sección
+
   handleClick(i) {
     const squares = this.state.squares.slice();
     //Haremos que se ignoren los cuadros ya rellenados o que el juego llegue a su término
@@ -102,7 +102,8 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
 
     return (
       <div>
-        <div className="status">{status}</div>
+        //Esto podemos borrarlo
+        //<div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -156,20 +157,23 @@ class Game extends React.Component {
   render() {
     //to use the most recent history entry to determine and display the game’s status
     const history = this.state.history;
-    const current = history[history.length - 1];
-    const winner = calculateWinner(current.squares);
+     const current = history[history.length - 1];
+     const winner = calculateWinner(current.squares);
 
-    let status;
-    if (winner) {
-      status = "Winner: " + winner;
-    } else {
-      status = "Siguiente jugador: " + (this.state.xIsNext ? "X" : "O");
-    }
+     let status;
+     if (winner) {
+       status = 'Winner: ' + winner;
+     } else {
+       status = 'Siguiente Jugador: ' + (this.state.xIsNext ? 'X' : 'O');
+     }
 
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+          />
         </div>
         <div className="game-info">
           <div>{status}</div>
