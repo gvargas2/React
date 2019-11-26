@@ -57,12 +57,13 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
   }
 /*
 
-  /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
+  //Agregamos handle.Click para no tener errores y poder guardar los valores*/
 
-  /*handleClick(i) {
-    const squares = this.state.squares.slice();
+  /*
+  handleClick(i) {
+    const squares = this.state.squares.slice(); */
     //Haremos que se ignoren los cuadros ya rellenados o que el juego llegue a su término
-    if (calculateWinner(squares) || squares[i]) {
+    /*if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O' ;
