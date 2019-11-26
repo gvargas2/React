@@ -1,11 +1,23 @@
 'use strict'
 
 class Square extends React.Component {
+
+  /*Agrego un "constructor a la clase para inicializar el "estado"*/
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
     return (
-      <button className="square" onClick={function() {
-        alert("click"); }}>
-        {this.props.value}
+      /*Al clikear cualquier botón, me salta una alerta*/
+      <button
+        className="square"
+        onClick={() => this.setState({value: "X"})}>
+
+      {this.state.value}
       </button>
     );
   }
@@ -13,6 +25,7 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
+    /*Hago que cada boton, cuadrado tenga un valor*/
     return <Square value={i}/>;
   }
 
