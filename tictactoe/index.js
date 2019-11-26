@@ -46,6 +46,13 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
     };
   }
 
+  /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = "X";
+    this.setState({squares: squares});
+  }
+
   renderSquare(i) {
     /*Hago que cada boton, cuadrado tenga un valor*/
     /*return <Square value={i}/>;*/
