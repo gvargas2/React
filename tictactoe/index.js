@@ -12,14 +12,13 @@
 
   */
 
-  //render() 
+  //render()
   function Square(props) {
     return (
       //Al clikear cualquier botón, me salta una alerta
       <button
         className="square"
-        onClick={props.onClick()}
-        >
+        onClick={props.onClick}>
           {props.value}
 
       </button>
