@@ -159,29 +159,28 @@ The DOM <button> element’s `onClick` attribute has a special meaning to React 
 
 When we try to click a Square, we should get an error because we haven’t defined handleClick yet.
 
+    class Board extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          squares: Array(9).fill(null),
+        };
+      }
 
-  class Board extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        squares: Array(9).fill(null),
-      };
-    }
+      handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
+      }
 
-    handleClick(i) {
-      const squares = this.state.squares.slice();
-      squares[i] = 'X';
-      this.setState({squares: squares});
-    }
-
-    renderSquare(i) {
-      return (
-        <Square
-          value={this.state.squares[i]}
-          onClick={() => this.handleClick(i)}
-        />
-      );
-    }
+      renderSquare(i) {
+        return (
+          <Square
+            value={this.state.squares[i]}
+            onClick={() => this.handleClick(i)}
+          />
+        );
+      }
 
 After these changes, we’re again able to **click on the Squares to fill them**, the same as we had before. However, now **the state is stored in the Board component instead of the individual Square components**. **When the Board’s state changes, the Square components re-render automatically**. Keeping the state of all squares in the Board component will allow it to determine the winner in the future.
 
@@ -269,60 +268,59 @@ Let’s also **change the “status” text in Board’s render** so that it dis
         // the rest has not changed
 
 ### Declaring a Winner
-Now that we show which player’s turn is next, we should also show when the game is won and there are no more turns to make. Copy this helper function and paste it at the end of the file:
+Now that we show which player’s turn is next, we should also show when the game is won and there are **no more turns to make**. Copy this helper function and paste it at the end of the file:
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    function calculateWinner(squares) {
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+          return squares[a];
+        }
+      }
+      return null;
     }
-  }
-  return null;
-}
+
 Given an array of 9 squares, this function will check for a winner and return 'X', 'O', or null as appropriate.
 
-We will call calculateWinner(squares) in the Board’s render function to check if a player has won. If a player has won, we can display text such as “Winner: X” or “Winner: O”. We’ll replace the status declaration in Board’s render function with this code:
+We will call `calculateWinner(squares)` in the Board’s render function to check if a player has won. If a player has won, we can display text such as “Winner: X” or “Winner: O”. We’ll replace the status declaration in Board’s render function with this code:
 
-  render() {
-    const winner = calculateWinner(this.state.squares);
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    render() {
+      const winner = calculateWinner(this.state.squares);
+      let status;
+      if (winner) {
+        status = 'Winner: ' + winner;
+      } else {
+        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      }
+
+      return (
+        // the rest has not changed
+
+We can now change the Board’s `handleClick` function to return early by ignoring a click **if someone has won the game or if a Square is already filled**:
+
+    handleClick(i) {
+      const squares = this.state.squares.slice();
+      if (calculateWinner(squares) || squares[i]) {
+        return;
+      }
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+      });
     }
 
-    return (
-      // the rest has not changed
-We can now change the Board’s handleClick function to return early by ignoring a click if someone has won the game or if a Square is already filled:
-
-  handleClick(i) {
-    const squares = this.state.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext,
-    });
-  }
-View the full code at this point
-
-Congratulations! You now have a working tic-tac-toe game. And you’ve just learned the basics of React too. So you’re probably the real winner here.
-
-Adding Time Travel
+### Adding Time Travel
 As a final exercise, let’s make it possible to “go back in time” to the previous moves in the game.
 
 Storing a History of Moves
