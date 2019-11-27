@@ -153,8 +153,8 @@ Bonus 2: eliminar constructor en board
 
         //Bonus 8
         const desc = move ?
-          'Go to move #' + move :
-          'Go to game start';
+          'Vamos al movimiento #' + move :
+          'Vamos al comienzo del juego';
         return (
           <li key={move}>
             <button onClick={() => this.jumpTo(move)}>{desc}</button>
