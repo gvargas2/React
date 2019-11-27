@@ -32,7 +32,10 @@ class Square extends React.Component
 class Board extends React.Component {
 /*Agregamos un constructor al elemento Board
 y establecemos un estado inicial que contenga
-un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
+un array de 9 nulls, que corresponden a los 9 cuadrados vacíos
+
+Bonus 2: eliminar constructor en board
+
   constructor(props) {
     super(props);
     this.state = {
@@ -40,8 +43,9 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
       xIsNext: true,
     };
   }
-  /*Agregamos handle.Click para no tener errores y poder guardar los valores*/
-  handleClick(i) {
+
+  Agregamos handle.Click para no tener errores y poder guardar los valores*/
+  /*handleClick(i) {
     const squares = this.state.squares.slice();
     //Haremos que se ignoren los cuadros ya rellenados o que el juego llegue a su término
     if (calculateWinner(squares) || squares[i]) {
@@ -52,29 +56,29 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
       squares: squares,
       xIsNext: !this.state.xIsNext,
     });
-  }
+  }*/
   renderSquare(i) {
     //Hago que cada boton, cuadrado tenga un valor
     //return <Square value={i}/>;
     return (
       <Square
-        //Hago que cada cuadrado tenga la propiedad "X" "O" o "Null"
-        value={this.state.squares[i]}
+        //Hago que cada cuadrado tenga la propiedad "X" "O" o "Null" - Bonus 3, cambio state por props
+        value={this.props.squares[i]}
         //Hacemos que al clikear un cuadrado, se llame el estado del Board.
-        onClick={() => this.handleClick(i)}
+        onClick={() => this.props.onClick(i)}
       />
     );
   }
 
   render() {
     //Vamos a determinar que jugador sigue y declarr un ganador
-     const winner = calculateWinner(this.state.squares);
+     /*const winner = calculateWinner(this.state.squares);
      let status;
      if (winner) {
        status = "Winner: " + winner;
      } else {
        status = 'Siguiente Jugador: ' + (this.state.xIsNext ? 'X' : 'O');
-   }
+   }*/
 
      return (
        <div>
@@ -100,15 +104,82 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
  }
 
  class Game extends React.Component {
+
+   //Bonus 1
+   constructor(props) {
+     super(props);
+     this.state = {
+       history: [{
+         squares: Array(9).fill(null),
+       }],
+       stepNumber: 0,
+       xIsNext: true,
+     };
+   }
+
+   //Bonus 7
+   handleClick(i) {
+      const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      const current = history[history.length - 1];
+      const squares = current.squares.slice();
+      if (calculateWinner(squares) || squares[i]) {
+        return;
+      }
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      this.setState({
+        history: history.concat([{
+          squares: squares
+        }]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+      });
+    }
+
+    //Implementando saltador de tiempo
+    jumpTo(step) {
+      this.setState({
+        stepNumber: step,
+        xIsNext: (step % 2) === 0,
+      });
+    }
+
    render() {
+     //Bonus 4
+      const history = this.state.history;
+      const current = history[this.state.stepNumber];
+      const winner = calculateWinner(current.squares);
+
+      const moves = history.map((step, move) => {
+
+        //Bonus 8
+        const desc = move ?
+          'Go to move #' + move :
+          'Go to game start';
+        return (
+          <li key={move}>
+            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          </li>
+        );
+      });
+
+      let status;
+      if (winner) {
+        status = 'Ganador: ' + winner;
+      } else {
+        status = 'Siguente jugador: ' + (this.state.xIsNext ? 'X' : 'O');
+      }
+
      return (
        <div className="game">
          <div className="game-board">
-           <Board />
+           <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+           />
          </div>
          <div className="game-info">
-           <div>{/* status */}</div>
-           <ol>{/* TODO */}</ol>
+           <div>{status}</div>
+           <ol>{moves}</ol>
          </div>
        </div>
      );
@@ -122,7 +193,7 @@ un array de 9 nulls, que corresponden a los 9 cuadrados vacíos*/
    document.getElementById('root')
  );
 
- 
+
  function calculateWinner(squares) {
    const lines = [
      [0, 1, 2],
