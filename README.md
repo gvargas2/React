@@ -1,6 +1,7 @@
 # Ejercicios de React
 
-## Tic Tac Toe (Tutorial)
+## Tic Tac Toe (Tutorial Documentación)
+Para ver el ejercicio funcionando, [clickea aquí](https://gvargas2.github.io/React/tictactoe/index.html)
 
 ### What Is React?
 React is a **declarative, efficient, and flexible JavaScript library** for building user interfaces. It lets you **compose complex UIs from small and isolated pieces of code** called “components”.
@@ -630,5 +631,3 @@ Rewrite Board to use two loops to make the squares instead of hardcoding them.
 Add a toggle button that lets you sort the moves in either ascending or descending order.
 When someone wins, highlight the three squares that caused the win.
 When no one wins, display a message about the result being a draw.
-
-## Proyecto "Hoteles"
